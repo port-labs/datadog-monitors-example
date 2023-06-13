@@ -1,0 +1,35 @@
+
+name: Ingest Datadog Monitors to Port
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+
+jobs:
+  ingest_datadog_monitors_to_port_job:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Python environment
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.8'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade setuptools
+          pip install --no-cache-dir -r requirements.txt
+      - name: Run Script
+        env:
+          PORT_CLIENT_ID: ${{ secrets.PORT_CLIENT_ID }}
+          PORT_CLIENT_SECRET: ${{ secrets.PORT_CLIENT_SECRET }}
+          DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DATADOG_APPLICATION_KEY: ${{ secrets.DATADOG_APPLICATION_KEY }}
+          DATADOG_API_URL: ${{ secrets.DATADOG_API_URL }}
+
+
+        run: |
+          echo "Getting Datadog Monitors"
+          python app.py

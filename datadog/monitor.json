@@ -1,0 +1,47 @@
+{
+    "identifier": "datadogMonitor",
+    "description": "This blueprint represents a Datadog monitor in our software catalog",
+    "title": "Datadog Monitor",
+    "icon": "Datadog",
+    "schema": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Details"
+        },
+        "state": {
+          "title": "Overall State",
+          "type": "string",
+          "enum": [
+            "Alert",
+            "Ignored",
+            "No Data",
+            "OK",
+            "Skipped",
+            "Unknown",
+            "Warn"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "title": "Monitor Type"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Tags"
+        },
+        "creator": {
+          "type": "string",
+          "title": "Creator",
+          "format": "user"
+        }
+      },
+      "required": []
+    },
+    "mirrorProperties": {},
+    "calculationProperties": {},
+    "relations": {}
+  }
